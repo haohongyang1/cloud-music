@@ -14,7 +14,7 @@ const AnswerFromGpt = () => {
             console.log('str==', str, '===textInfo.current===', streamingText.current)
             setText(streamingText.current)
         })
-        const fetchGpt = new StreamGpt('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', {
+        const fetchGpt = new StreamGpt('XXXXXXX', {
             onStart: (prompt) => {
                 streaming.current = true
             },
