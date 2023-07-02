@@ -2,31 +2,38 @@ import React, { useEffect, useRef, useState } from 'react'
 // import { getGPT4Stream } from '../../api/request'
 import * as css from './style'
 import { StreamGpt } from './StreamGpt.ts'
+import { Typewriter } from './Typewriter.ts'
 const AnswerFromGpt = () => {
     const [text, setText] = useState('')
-    const textInfo = useRef('')
+    const streamingText = useRef('')
+    const streaming = useRef(false)
+
     useEffect(() => {
-        const fetchGpt = new StreamGpt('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', {
+        const typewriter = new Typewriter((str) => {
+            streamingText.current += str || ''
+            console.log('str==', str, '===textInfo.current===', streamingText.current)
+            setText(streamingText.current)
+        })
+        const fetchGpt = new StreamGpt('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', {
             onStart: (prompt) => {
-                textInfo.current = ''
-                setText('')
-                console.log("开始请求=onStart==", prompt);
+                streaming.current = true
             },
             onCreated: () => {
+                typewriter.start()
+
                 console.log("第一个回包执行==onCreated==")
             },
             onPatch: (streamText) => {
-                if (!streamText) return;
-                console.log("textInfo===", textInfo.current);
-                console.log("有更新内容时==onPatch==", text + streamText)
-                textInfo.current = textInfo.current + streamText
-                setText(textInfo.current)
+                typewriter.add(streamText)
             },
             onDone: () => {
                 console.log("结束==onDone=")
+                typewriter.done()
+                streaming.current = false
+                streamingText.current = ''
             }
         })
-        fetchGpt.stream('前端工程师的工作内容')
+        fetchGpt.stream('我是一名3年工作经验的前端开发工程师，正在写简历，帮我写一份工作内容，我在简历中使用')
     }, [])
     const onChange = () => { }
     return <css.Container>
