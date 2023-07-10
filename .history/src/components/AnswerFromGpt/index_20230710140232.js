@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 // import { getGPT4Stream } from '../../api/request'
 import * as css from './style'
-import { StreamGpt } from '../../utils/StreamGpt'
-import { Typewriter } from '../../utils/Typewriter'
+import { StreamGpt } from './StreamGpt.ts'
+import { Typewriter } from './Typewriter.ts'
 const AnswerFromGpt = () => {
     const [text, setText] = useState('')
     const streamingText = useRef('')

@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 // import { getGPT4Stream } from '../../api/request'
 import * as css from './style'
-import { StreamGpt } from '../../utils/StreamGpt'
-import { Typewriter } from '../../utils/Typewriter'
+import { StreamGpt } from './StreamGpt.ts'
+import { Typewriter } from './Typewriter.ts'
 const AnswerFromGpt = () => {
     const [text, setText] = useState('')
     const streamingText = useRef('')
     const streaming = useRef(false)
+    const trainInfo = useState('')
 
     useEffect(() => {
         const typewriter = new Typewriter((str) => {
@@ -37,7 +38,8 @@ const AnswerFromGpt = () => {
     }, [])
     const onChange = () => { }
     return <css.Container>
-        <css.TextareaStyle rows="10" cols="30" value={text} name="info" placeholder="为您推荐最优文案" type='text' defaultValue="" onChange={onChange} />
+        <input name="训练" value={trainInfo} />
+        <css.AnswerInfo></css.AnswerInfo>
     </css.Container>
 }
 export default AnswerFromGpt

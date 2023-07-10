@@ -1,6 +1,6 @@
 import { GlobalStyle } from './style';
 
-// import AnswerFromGpt from './components/AnswerFromGpt';
+import AnswerFromGpt from './components/AnswerFromGpt';
 import ResumeInfoExtraction from './components/ResumeInfoExtraction';
 function App() {
   return (
