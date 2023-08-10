@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 // import { getGPT4Stream } from '../../api/request'
 import * as css from './style'
-import { StreamGpt } from '../../utils/StreamGpt'
+// import { StreamGpt } from '@/utils/StreamGpt.ts'
 // import { Typewriter } from '../../utils/Typewriter'
 const ResumeInfoExtraction = () => {
     const [text, setText] = useState('')
